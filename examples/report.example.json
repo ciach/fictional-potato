@@ -1,0 +1,55 @@
+{
+  "target_id": "src__services__userService.ts",
+  "status": "partial_success",
+  "source_files": [
+    "src/services/userService.ts"
+  ],
+  "test_files": [
+    "src/services/userService.test.ts"
+  ],
+  "coverage_evidence": [
+    {
+      "kind": "lcov",
+      "path": "coverage/lcov.info",
+      "used": true,
+      "notes": "Line coverage parsed"
+    },
+    {
+      "kind": "heuristic",
+      "path": "",
+      "used": true,
+      "notes": "Branch inference used for missing negative path"
+    }
+  ],
+  "missing_scenarios": [
+    {
+      "title": "Service returns provider error payload",
+      "severity": "high",
+      "evidence_type": "measured",
+      "description": "The service success path is covered, but provider error mapping is not exercised.",
+      "recommended_assertions": [
+        "assert translated error code",
+        "assert retry is not attempted for non-retriable error"
+      ]
+    }
+  ],
+  "untested_branches": [
+    {
+      "branch": "if response.status >= 400",
+      "evidence_type": "measured",
+      "notes": "No matching branch hits seen"
+    }
+  ],
+  "edge_cases": [
+    "null provider response",
+    "empty user id",
+    "timeout during fetch"
+  ],
+  "recommended_tests": [
+    "Add test for non-retriable provider error",
+    "Add test for timeout fallback path"
+  ],
+  "confidence": 0.83,
+  "risk_score": 72,
+  "summary": "Core success flow is tested, but failure handling and timeout behavior are under-covered."
+}

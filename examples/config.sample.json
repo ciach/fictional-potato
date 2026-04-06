@@ -1,0 +1,23 @@
+{
+  "source_globs": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "packages/*/src/**/*.ts",
+    "packages/*/src/**/*.tsx"
+  ],
+  "test_globs": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.test.tsx",
+    "**/*.spec.tsx",
+    "tests/**/*.ts",
+    "packages/*/tests/**/*.ts"
+  ],
+  "exclude_globs": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/coverage/**"
+  ],
+  "mapping_strategy": "hybrid"
+}

@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoverageAnalysisReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "target_id",
+    "status",
+    "source_files",
+    "test_files",
+    "coverage_evidence",
+    "missing_scenarios",
+    "untested_branches",
+    "edge_cases",
+    "recommended_tests",
+    "confidence",
+    "risk_score",
+    "summary"
+  ],
+  "properties": {
+    "target_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "partial_success",
+        "failed"
+      ]
+    },
+    "source_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "test_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "coverage_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "path",
+          "used"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "lcov",
+              "coverage_xml",
+              "jacoco",
+              "heuristic",
+              "other"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "used": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "missing_scenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "severity",
+          "evidence_type",
+          "description"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "evidence_type": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "heuristic"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "recommended_assertions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "untested_branches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "branch",
+          "evidence_type"
+        ],
+        "properties": {
+          "branch": {
+            "type": "string"
+          },
+          "evidence_type": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "heuristic"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "edge_cases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_tests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "risk_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
